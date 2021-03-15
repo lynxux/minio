@@ -921,7 +921,7 @@ func getCacheMetrics() MetricsGroup {
 	return MetricsGroup{
 		Metrics: []Metric{},
 		initialize: func(ctx context.Context, m *MetricsGroup) {
-			cacheObjLayer := newCachedObjectLayerFn()
+			cacheObjLayer := NewCachedObjectLayerFn()
 			// Service not initialized yet
 			if cacheObjLayer == nil {
 				return
@@ -1037,7 +1037,7 @@ func getBucketUsageMetrics() MetricsGroup {
 				return
 			}
 
-			if globalIsGateway {
+			if GlobalIsGateway {
 				return
 			}
 
@@ -1108,7 +1108,7 @@ func getLocalStorageMetrics() MetricsGroup {
 				return
 			}
 
-			if globalIsGateway {
+			if GlobalIsGateway {
 				return
 			}
 
@@ -1145,7 +1145,7 @@ func getClusterStorageMetrics() MetricsGroup {
 				return
 			}
 
-			if globalIsGateway {
+			if GlobalIsGateway {
 				return
 			}
 
@@ -1266,7 +1266,7 @@ func (c *minioClusterCollector) Collect(out chan<- prometheus.Metric) {
 	}
 
 	// Call peer api to fetch metrics
-	peerCh := globalNotificationSys.GetClusterMetrics(GlobalContext)
+	peerCh := GlobalNotificationSys.GetClusterMetrics(GlobalContext)
 	selfCh := ReportMetrics(GlobalContext, GetAllGenerators)
 	wg.Add(2)
 	go publish(peerCh)
