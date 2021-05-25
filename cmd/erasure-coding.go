@@ -20,7 +20,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/klauspost/reedsolomon"
+	"github.com/lynxux/reedsolomon"
 	"github.com/minio/minio/cmd/logger"
 )
 
